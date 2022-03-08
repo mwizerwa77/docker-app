@@ -43,4 +43,4 @@ jobs:
         application_name: docker-demo-app
         environment_name: Dockerdemoapp-env
         version_label: "docker-demo-app-${{ steps.format-time.outputs.replaced }}"
-        region: us-east-2
+        region: us-east-1
