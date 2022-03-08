@@ -35,12 +35,19 @@ jobs:
         replace-with: '-'
         flags: 'g'
 
+
+    - name: Build the Docker image
+       run: docker build -t ga63qes/flask-birds-classifier -f Dockerfile .
+    - name: Generate Deployment Package
+       run: zip -r deploy.zip *
+
     - name: Deploy to EB
       uses: einaregilsson/beanstalk-deploy@v14
       with:
         aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        application_name: docker-demo-app
-        environment_name: Dockerdemoapp-env
+        application_name: "docker-demo-app"
+        environment_name: 'Dockerdemoapp-env'
         version_label: "docker-demo-app-${{ steps.format-time.outputs.replaced }}"
-        region: us-east-1
+        region: 'us-east-1'
+        deployment_package: deploy.zip
