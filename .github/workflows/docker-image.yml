@@ -19,10 +19,7 @@ jobs:
      
     - name: Build the Docker image
       run: docker build -t mwizerwa77/docker-app-demo -f Dockerfile .
-
-    - name: Run npm tests
-      run: docker run -e CI=true mwizerwa77/docker-app-demo npm run test -- --coverage
-    
+      
     - name: Generate Deployment Package
       run: zip -r deploy.zip *
 
